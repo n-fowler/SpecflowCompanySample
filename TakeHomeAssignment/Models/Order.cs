@@ -10,7 +10,7 @@ namespace TakeHomeAssignment.Models
         {
             get
             {
-                if (this.Items == null || this.Items.Sum(i => i.Quantity) <10)
+                if (this.Items == null || this.Items.Sum(i => i.Quantity) <= 10)
                 {
                     return 0;
                 }
@@ -36,8 +36,8 @@ namespace TakeHomeAssignment.Models
                 var total = this.Items?.Sum(i => i.Price * i.Quantity);
 
                 var discount = this.PercentageDiscount;
-                
-                return total - total * (discount/100);
+
+                return total - total * (discount / 100);
             }
         }
     }

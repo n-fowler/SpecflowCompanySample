@@ -1,4 +1,6 @@
-﻿using TakeHomeAssignment.Api;
+﻿using NUnit.Framework;
+using System.Linq;
+using TakeHomeAssignment.Api;
 using TakeHomeAssignment.Models;
 using TechTalk.SpecFlow;
 
@@ -19,6 +21,8 @@ namespace TakeHomeAssignment.Steps
         public void GivenIHaveItemsInMyOrder(int itemCount)
         {
             this.orderApi.CreateOrder();
+            this.orderApi.AddItem("TestProduct", itemCount, 5.0);
+
         }
 
         [When(@"I view the checkout summary")]
@@ -30,11 +34,12 @@ namespace TakeHomeAssignment.Steps
         [Then(@"there is a (.*)% discount applied")]
         public void ThenThereIsADiscountApplied(int discount)
         {
-            //TODO verify the correct discount
-            ScenarioContext.Current.Pending();
+            Assert.AreEqual(discount, this.order.PercentageDiscount);
+
+            var expectedTotal = this.order?.Items?.Sum(i => i.Price * i.Quantity);
+            var expectedDiscountedTotal = expectedTotal - expectedTotal * (discount / 100);
+            Assert.AreEqual(expectedDiscountedTotal, order.OrderTotal);
         }
-
-
     }
 }
 
