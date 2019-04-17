@@ -30,4 +30,11 @@ Scenario: Orders with 11 items receive a 5% discount
  | TestItemOne | 5.0   | 5        |
  | TestItemTwo | 2.0   | 6        |
  Then there is a 5% discount applied
+ 
+ Notes on Testing api's specifically:
+ 
+ I would validate that we can hit the api with a valid test order, invalid test order, and other scenarios depending
+ on the nature of how it's built (order not under current customers account?  Customer doesn't have access rights? etc)
+ verify that the status is correct, the returned result is formatted correctly with the right data, and other specifics related
+ to the feature.
 ```
