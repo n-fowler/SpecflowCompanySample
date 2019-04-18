@@ -1,8 +1,10 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using TakeHomeAssignment.Api;
 using TakeHomeAssignment.Models;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace TakeHomeAssignment.Steps
 {
@@ -18,11 +20,38 @@ namespace TakeHomeAssignment.Steps
         }
 
         [Given(@"I have (.*) items in my order")]
-        public void GivenIHaveItemsInMyOrder(int itemCount)
+        public void GivenIHaveItemsInMyOrder(int itemQuantity)
         {
             this.orderApi.CreateOrder();
-            this.orderApi.AddItem("TestProduct", itemCount, 5.0);
+            this.orderApi.AddItem("TestProduct", itemQuantity, 5.0);
 
+        }
+
+        [Given(@"I have (.*) items of (.*) with a price of (.*) in my order")]
+        public void GivenIHaveMultipleUniqueItemsInMyOrder(int itemQuantity, string itemName, double itemPrice)
+        {
+            if (order == null)
+            {
+                order = this.orderApi.CreateOrder();
+            }
+
+            this.orderApi.AddItem(itemName, itemQuantity, itemPrice);
+        }
+
+        [Given(@"I have the following items in my cart")]
+        public void GivenIHaveTheFollowingItemsInMyCart(Table table)
+        {
+            if (order == null)
+            {
+                order = this.orderApi.CreateOrder();
+            }
+
+            IEnumerable<Item> items = table.CreateSet<Item>();
+
+            foreach (Item item in items)
+            {
+                this.orderApi.AddItem(item.Name, item.Quantity, item.Price);
+            }
         }
 
         [When(@"I view the checkout summary")]

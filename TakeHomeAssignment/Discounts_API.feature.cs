@@ -230,6 +230,77 @@ testRunner.Then("there is a 20% discount applied", ((string)(null)), ((TechTalk.
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Orders with 11 items and two unique products recieve a 5% discount")]
+        public virtual void OrdersWith11ItemsAndTwoUniqueProductsRecieveA5Discount()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Orders with 11 items and two unique products recieve a 5% discount", null, ((string[])(null)));
+#line 48
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 49
+testRunner.Given("I have 5 items of Widget One with a price of 5.00 in my order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 50
+testRunner.And("I have 6 items of Widget Two with a price of 10.00 in my order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
+testRunner.When("I view the checkout summary", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 52
+testRunner.Then("there is a 5% discount applied", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Orders with 30 items in their cart receive a 10% discount")]
+        public virtual void OrdersWith30ItemsInTheirCartReceiveA10Discount()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Orders with 30 items in their cart receive a 10% discount", null, ((string[])(null)));
+#line 54
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Price",
+                        "Quantity"});
+            table1.AddRow(new string[] {
+                        "Widget One",
+                        "5.0",
+                        "5"});
+            table1.AddRow(new string[] {
+                        "Widget Two",
+                        "2.0",
+                        "6"});
+            table1.AddRow(new string[] {
+                        "Widget Three",
+                        "4.0",
+                        "2"});
+            table1.AddRow(new string[] {
+                        "Widget Four",
+                        "7.0",
+                        "7"});
+            table1.AddRow(new string[] {
+                        "Widget Five",
+                        "6.0",
+                        "4"});
+            table1.AddRow(new string[] {
+                        "Widget Six",
+                        "11.0",
+                        "5"});
+            table1.AddRow(new string[] {
+                        "Widget Seven",
+                        "35.0",
+                        "1"});
+#line 55
+ testRunner.Given("I have the following items in my cart", ((string)(null)), table1, "Given ");
+#line 64
+ testRunner.When("I view the checkout summary", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 65
+ testRunner.Then("there is a 10% discount applied", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
